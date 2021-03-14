@@ -1,14 +1,16 @@
 import 'package:TimePass/Media/music.dart';
+// import 'package:TimePass/Screens/VideoApp.dart';
+import 'package:TimePass/mp3/VideoApp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class playlist extends StatefulWidget {
+class VideoList extends StatefulWidget {
   @override
-  _playlistState createState() => _playlistState();
+  _VideoListState createState() => _VideoListState();
 }
 
-class _playlistState extends State<playlist> {
+class _VideoListState extends State<VideoList> {
   String useruid;
   var Data;
   User user;
@@ -23,7 +25,7 @@ class _playlistState extends State<playlist> {
     print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
     print(useruid);
     Data = FirebaseFirestore.instance
-        .collection('Songs')
+        .collection('Videos')
         // .doc('usersfeed')
         // .collection('userimage')
         .snapshots();
@@ -63,11 +65,11 @@ class _playlistState extends State<playlist> {
   }
 
   Widget ListTile(
-      String image, String songurl, String name, String id, String writter) {
+      String image, String videourl, String name, String id, String writter) {
     return Container(
-      height: 80,
+      height: 95,
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(top: 20, left: 10, right: 10),
+      margin: EdgeInsets.only(top: 6, left: 10, right: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
           color: Color(0xffffffff),
@@ -113,11 +115,9 @@ class _playlistState extends State<playlist> {
                           style: TextStyle(fontSize: 20),
                         )),
                     Container(
-                        width: 150,
                         margin: EdgeInsets.only(top: 4),
                         child: Text(
                           writter,
-                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 13),
                         )),
                   ],
@@ -127,16 +127,8 @@ class _playlistState extends State<playlist> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => music(
-                          // "https://firebasestorage.googleapis.com/v0/b/janavi25preaload.appspot.com/o/Taylor%20Swift%20-%20Love%20Story_50k.mp3?alt=media&token=6a4e6578-e5dc-4e42-98c2-aa2dcc70197a"
-                          songurl,
-                          name,
-                          writter,
-                          id,
-                          image)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VideoApp(videourl)));
             },
             child: Container(
               height: 40,
@@ -168,7 +160,7 @@ class _playlistState extends State<playlist> {
 
   getUser() async {
     Data = FirebaseFirestore.instance
-        .collection('Songs')
+        .collection('Videos')
         // .doc('usersfeed')
         // .collection('userimage')
         .snapshots();

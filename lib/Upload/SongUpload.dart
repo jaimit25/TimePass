@@ -166,7 +166,7 @@ class _SongUploadState extends State<SongUpload> {
     var storage = FirebaseStorage.instance;
     var snap = await storage
         .ref()
-        .child("songs")
+        .child("Songs")
         .child('Songs')
         .child(songpath)
         .putData(song);
