@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Games/chess/home_page.dart';
 import 'Screens/Navigation.dart';
+import 'Screens/Navigation.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Navigation(),
+      home: login(),
     );
   }
 }

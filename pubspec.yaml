@@ -72,6 +72,8 @@ dependencies:
   flutter_stateless_chessboard: ^0.0.2
   chess: ^0.6.5
   flip_card: ^0.4.4
+  audioplayer: ^0.8.1
+  
 
 
 dev_dependencies:

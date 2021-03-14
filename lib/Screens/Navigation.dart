@@ -1,3 +1,5 @@
+import 'package:TimePass/Games/memory%20game/home.dart';
+import 'package:TimePass/tabs/feed.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:TimePass/tabs/music.dart';
@@ -15,10 +17,10 @@ class _NavigationState extends State<Navigation> {
       child: music(),
     ),
     Center(
-      child: music(),
+      child: feed(),
     ),
     Center(
-      child: music(),
+      child: Home(),
     ),
     Center(
       child: profile(),

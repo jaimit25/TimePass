@@ -1,5 +1,5 @@
 class userprofile {
-  String Email, Name, aboutus, uid, Photo, city, phone;
+  String Email, Name, aboutus, uid, Photo, occupation, phone;
 
   userprofile(
       {this.Email,
@@ -7,7 +7,7 @@ class userprofile {
       this.aboutus,
       this.uid,
       this.Photo,
-      this.city,
+      this.occupation,
       this.phone});
 
   factory userprofile.fromDocument(doc) {
@@ -17,7 +17,7 @@ class userprofile {
         aboutus: doc['aboutus'],
         uid: doc['uid'],
         Photo: doc['Photo'],
-        city: doc['city'],
+        occupation: doc['occupation'],
         phone: doc['phone']);
   }
 }

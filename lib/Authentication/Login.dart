@@ -22,8 +22,8 @@ class _loginState extends State<login> {
   TextEditingController _enroll_controller = new TextEditingController();
   TextEditingController _name = new TextEditingController();
   TextEditingController _phonenumber = new TextEditingController();
-  TextEditingController _location = new TextEditingController();
-  TextEditingController _class = new TextEditingController();
+
+  TextEditingController _occupation = new TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -282,6 +282,23 @@ class _loginState extends State<login> {
                           ),
                           Divider(color: Colors.grey, height: 8),
                           TextFormField(
+                            controller: _occupation,
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.featured_play_list,
+                                  color: Colors.grey,
+                                ),
+                                labelText: "Occupation",
+                                labelStyle: TextStyle(color: Colors.black87),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent)),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent))),
+                          ),
+                          Divider(color: Colors.grey, height: 8),
+                          TextFormField(
                             controller: _passwordController,
                             obscureText: _passwordVisible,
                             decoration: InputDecoration(
@@ -319,7 +336,7 @@ class _loginState extends State<login> {
                     ),
                   ),
                   Positioned(
-                    top: 290,
+                    top: 350,
                     child: Center(
                       child: GestureDetector(
                         onTap: () async {
@@ -338,7 +355,7 @@ class _loginState extends State<login> {
                                 .user;
                             print('you clicked login');
                             // Email, Name, aboutus, uid, Photo, city, phone;
-                            FirebaseFirestore.instance
+                            await FirebaseFirestore.instance
                                 .collection('/users')
                                 .doc(user.uid)
                                 .set({
@@ -346,8 +363,9 @@ class _loginState extends State<login> {
                               'Name': _name.text,
                               'Email': _emailController.text,
                               'phone': _phonenumber.text,
-                              'aboutus': "Tell about",
-                              'city': "",
+                              'aboutus':
+                                  '\"You Know Yourself better\"...Tell About Yourself',
+                              'occupation': _occupation.text,
                               'Photo':
                                   'https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png'
                             }).then((result) {
