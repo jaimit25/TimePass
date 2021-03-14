@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "482430568435",
+    "project_id": "timepass-b4ae4",
+    "storage_bucket": "timepass-b4ae4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482430568435:android:9ff463b8599fd7d0ac7486",
+        "android_client_info": {
+          "package_name": "com.example.TimePass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482430568435-td1ldpahf7vmbvku82lhudr27j2sld1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxwaPuoFQ15xXSd9BbKKzCOHcYq8LrGWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482430568435-td1ldpahf7vmbvku82lhudr27j2sld1t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
