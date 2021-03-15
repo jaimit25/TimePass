@@ -1,3 +1,4 @@
+import 'package:TimePass/Upload/SongUpload.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -101,11 +102,19 @@ class _loginState extends State<login> {
                     //   width: 220,
                     //   height: 200,
                     // ),
-                    Container(
-                      child: Image.network(
-                          "https://firebasestorage.googleapis.com/v0/b/janavi25preaload.appspot.com/o/TimePassNoText.png?alt=media&token=48743dbd-d1b3-447b-ac0b-56f35cadb7a7"),
-                      height: 190,
-                      width: 190,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SongUpload()));
+                      },
+                      child: Container(
+                        child: Image.network(
+                            "https://firebasestorage.googleapis.com/v0/b/janavi25preaload.appspot.com/o/TimePassNoText.png?alt=media&token=48743dbd-d1b3-447b-ac0b-56f35cadb7a7"),
+                        height: 190,
+                        width: 190,
+                      ),
                     ),
                     Tabs(context),
                     AnimatedCrossFade(
@@ -242,6 +251,21 @@ class _loginState extends State<login> {
                     ),
                   ),
                 ),
+                // GestureDetector(
+                //   onTap: () {
+
+                //   },
+                //   child: Positioned(
+                //     top: 700,
+                //     child: Text(
+                //       "Login As Admin",
+                //       style: TextStyle(
+                //         fontSize: 15,
+                //         color: Colors.blue,
+                //       ),
+                //     ),
+                //   ),
+                // )
               ],
             ),
             Padding(

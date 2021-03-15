@@ -1,4 +1,5 @@
 import 'package:TimePass/Media/music.dart';
+import 'package:TimePass/Upload/SongUpload.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,14 @@ class _playlistState extends State<playlist> {
           ),
         ),
         onWillPop: onWillPop,
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SongUpload()));
+        },
       ),
     );
   }

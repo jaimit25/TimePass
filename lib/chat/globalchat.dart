@@ -115,10 +115,20 @@ class _globalchatState extends State<globalchat> {
                                               width: 30,
                                             ),
                                           ),
-                                          Container(
-                                            margin: EdgeInsets.only(right: 10),
-                                            child: rightside(document['name'],
-                                                document['message']),
+                                          GestureDetector(
+                                            onLongPress: () {
+                                              String idd = document.id;
+                                              FirebaseFirestore.instance
+                                                  .collection('Chats')
+                                                  .doc(document.id)
+                                                  .delete();
+                                            },
+                                            child: Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 10),
+                                              child: rightside(document['name'],
+                                                  document['message']),
+                                            ),
                                           )
                                         ],
                                       ),

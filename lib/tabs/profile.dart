@@ -102,8 +102,8 @@ class _profileState extends State<profile> {
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height: 120,
-                    width: 80,
+                    height: 170,
+                    width: 120,
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.all(Radius.circular(20)),

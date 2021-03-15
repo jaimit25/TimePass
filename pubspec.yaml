@@ -73,14 +73,20 @@ dependencies:
   chess: ^0.6.5
   flip_card: ^0.4.4
   audioplayer: ^0.8.1
+  flutter_launcher_icons: ^0.9.0
 
   
 
 
 dev_dependencies:
+
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.jpeg"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
