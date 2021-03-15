@@ -94,3 +94,4 @@ class _splashState extends State<splash> {
     print(documents);
   }
 }
+//close
