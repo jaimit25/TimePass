@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:TimePass/chat/Chat/database.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../Model/userprofile.dart';
 
@@ -12,10 +13,12 @@ class Chat extends StatefulWidget {
   Chat({this.chatRoomId});
 
   @override
-  _ChatState createState() => _ChatState();
+  _ChatState createState() => _ChatState(chatRoomId);
 }
 
 class _ChatState extends State<Chat> {
+  String ROomid;
+  _ChatState(this.ROomid);
   Stream<QuerySnapshot> chats;
   TextEditingController messageEditingController = new TextEditingController();
   var postnumber;
@@ -89,6 +92,31 @@ class _ChatState extends State<Chat> {
           appBar: AppBar(
             backgroundColor: Colors.pink,
             title: Text('Message '),
+            actions: [
+              // IconButton(
+              //   onPressed: () {
+              //     FirebaseFirestore.instance
+              //         .collection("chatRoom")
+              //         .doc(ROomid)
+              //         .delete();
+              //     // .collection("chats")
+              //     // .orderBy('time')
+              //     // .snapshots();
+              //     Fluttertoast.showToast(
+              //         msg: 'Delete Message',
+              //         timeInSecForIosWeb: 3,
+              //         textColor: Colors.white,
+              //         backgroundColor: Colors.pink,
+              //         gravity: ToastGravity.CENTER);
+              //     setState(() {});
+              //   },
+              //   icon: Icon(
+              //     Icons.delete_rounded,
+              //     color: Colors.white,
+              //     size: 25,
+              //   ),
+              // )
+            ],
           ),
           body: Container(
             child: Stack(
@@ -103,6 +131,26 @@ class _ChatState extends State<Chat> {
                     color: Colors.pink,
                     child: Row(
                       children: [
+                        // Container(
+                        //   child: Center(
+                        //     child: IconButton(
+                        //       onPressed: () {
+                        //         FirebaseFirestore.instance
+                        //             .collection("chatRoom")
+                        //             .doc(widget.chatRoomId)
+                        //             .delete();
+                        //         // .collection("chats")
+                        //         // .orderBy('time')
+                        //         // .snapshots();
+                        //       },
+                        //       icon: Icon(
+                        //         Icons.delete_rounded,
+                        //         color: Colors.white,
+                        //         size: 25,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         Container(
                           height: 40,
                           width: 250,
