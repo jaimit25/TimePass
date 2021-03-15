@@ -36,8 +36,11 @@ class _profileState extends State<profile> {
     print("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
     // postnumber =
     //     await FirebaseFirestore.instance.collection('users').snapshots().length;
-    final QuerySnapshot qSnap =
-        await FirebaseFirestore.instance.collection('users').get();
+    final QuerySnapshot qSnap = await FirebaseFirestore.instance
+        .collection('PrivateCollection')
+        .doc(localuser.Name)
+        .collection(await FirebaseAuth.instance.currentUser.uid)
+        .get();
     int documents = qSnap.docs.length;
     setState(() {
       docval = documents;
@@ -242,53 +245,65 @@ class _profileState extends State<profile> {
           ],
         ),
       ),
-      Container(
-        margin: EdgeInsets.only(top: 0),
-        width: MediaQuery.of(context).size.width,
-        height: 364,
-        decoration: BoxDecoration(
-          color: Colors.grey[600],
-        ),
-        child: Container(
-          height: double.infinity,
-          margin: EdgeInsets.only(bottom: 1, top: 1),
-          width: double.infinity,
-          child: GridView.builder(
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, i) {
-              return Container(
-                  child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  margin: EdgeInsets.only(left: 1, right: 1, top: 1),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Container(
-                          height: 119,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"),
+      StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('PrivateCollection')
+            .doc(localuser.Name)
+            .collection(localuser.uid)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: const Text('Loading events...'));
+          }
+          return Container(
+            margin: EdgeInsets.only(top: 0),
+            width: MediaQuery.of(context).size.width,
+            height: 364,
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+            ),
+            child: Container(
+              height: double.infinity,
+              margin: EdgeInsets.only(bottom: 1, top: 1),
+              width: double.infinity,
+              child: GridView.builder(
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, i) {
+                  return Container(
+                      child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      margin: EdgeInsets.only(left: 1, right: 1, top: 1),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Container(
+                              height: 119,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      snapshot.data.docs[i]['Photo']),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ));
-            },
-            itemCount: 200,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          ),
-        ),
-      )
+                    ),
+                  ));
+                },
+                itemCount: docval,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
+              ),
+            ),
+          );
+        },
+      ),
     ]);
   }
 
@@ -310,5 +325,20 @@ class _profileState extends State<profile> {
     });
     print(localuser.Email);
     print('this method has run');
+    //  var snapshots=await FirebaseFirestore.instance.collection('PrivateCollection').doc(localuser.Name).get();
+    //  postnumber=snapshots.
+    print("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+    // postnumber =
+    //     await FirebaseFirestore.instance.collection('users').snapshots().length;
+    final QuerySnapshot qSnap = await FirebaseFirestore.instance
+        .collection('PrivateCollection')
+        .doc(localuser.Name)
+        .collection(await FirebaseAuth.instance.currentUser.uid)
+        .get();
+    int documents = qSnap.docs.length;
+    setState(() {
+      docval = documents;
+    });
+    print(documents);
   }
 }

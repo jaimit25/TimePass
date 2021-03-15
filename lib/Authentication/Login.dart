@@ -10,6 +10,33 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  var dateee;
+  String date = "22222";
+  DateTime currentDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime pickedDate = await showDatePicker(
+        context: context,
+        initialDate: currentDate,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2050));
+    if (pickedDate != null && pickedDate != currentDate)
+      setState(() {
+        date = pickedDate.toString()[0] +
+            pickedDate.toString()[1] +
+            pickedDate.toString()[2] +
+            pickedDate.toString()[3];
+
+        var intdate = int.parse(date);
+        assert(intdate is int);
+        print(intdate);
+
+        setState(() {
+          dateee = intdate;
+        });
+      });
+  }
+
   List<Color> colors = [Color(0xFF330867), Color(0xFF30cfd0)];
   int _index = 0;
   var _passwordVisible = true;
@@ -17,13 +44,14 @@ class _loginState extends State<login> {
   String Nameuser;
   String password;
   FirebaseAuth auth;
+  int Dateshow;
   User user;
   final GlobalKey<FormState> formstate = GlobalKey<FormState>();
   TextEditingController _enroll_controller = new TextEditingController();
   TextEditingController _name = new TextEditingController();
   TextEditingController _phonenumber = new TextEditingController();
 
-  TextEditingController _occupation = new TextEditingController();
+  // TextEditingController _occupation = new TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -39,49 +67,55 @@ class _loginState extends State<login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      top: false,
-      bottom: false,
-      left: false,
-      right: false,
-      child: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: colors,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter)),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // Image.asset(
-                //   'img/logobus.png',
-                //   width: 220,
-                //   height: 200,
-                // ),
-                Container(
-                  child: Image.network(
-                      "https://firebasestorage.googleapis.com/v0/b/janavi25preaload.appspot.com/o/TimePassNoText.png?alt=media&token=48743dbd-d1b3-447b-ac0b-56f35cadb7a7"),
-                  height: 190,
-                  width: 190,
+    onWillPop() {
+      Navigator.of(context).pop();
+    }
+
+    return WillPopScope(
+        child: Scaffold(
+            body: SafeArea(
+          top: false,
+          bottom: false,
+          left: false,
+          right: false,
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: colors,
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter)),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // Image.asset(
+                    //   'img/logobus.png',
+                    //   width: 220,
+                    //   height: 200,
+                    // ),
+                    Container(
+                      child: Image.network(
+                          "https://firebasestorage.googleapis.com/v0/b/janavi25preaload.appspot.com/o/TimePassNoText.png?alt=media&token=48743dbd-d1b3-447b-ac0b-56f35cadb7a7"),
+                      height: 190,
+                      width: 190,
+                    ),
+                    Tabs(context),
+                    AnimatedCrossFade(
+                      duration: Duration(milliseconds: 150),
+                      firstChild: Login(context),
+                      secondChild: SignUp(context),
+                      crossFadeState: _index == 0
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
+                    )
+                  ],
                 ),
-                Tabs(context),
-                AnimatedCrossFade(
-                  duration: Duration(milliseconds: 150),
-                  firstChild: Login(context),
-                  secondChild: SignUp(context),
-                  crossFadeState: _index == 0
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
-                )
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    ));
+        )),
+        onWillPop: onWillPop);
   }
 
   Widget Login(BuildContext context) {
@@ -173,10 +207,12 @@ class _loginState extends State<login> {
                           print(
                               'XXXXXXXXXXXXX XXXXxxxxxxxxxxRxxxxSuccccccesfull xxxxxxxxxxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXX');
                           print('you clicked login button');
-                          Navigator.push(
+
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Navigation()));
+                          // Navigator.of(context).pop();
                         });
                       },
                       child: Container(
@@ -281,22 +317,50 @@ class _loginState extends State<login> {
                                         BorderSide(color: Colors.transparent))),
                           ),
                           Divider(color: Colors.grey, height: 8),
-                          TextFormField(
-                            controller: _occupation,
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  Icons.featured_play_list,
-                                  color: Colors.grey,
+                          // TextFormField(
+                          //   controller: _occupation,
+                          //   decoration: InputDecoration(
+                          //       prefixIcon: Icon(
+                          //         Icons.featured_play_list,
+                          //         color: Colors.grey,
+                          //       ),
+                          //       labelText: "Occupation",
+                          //       labelStyle: TextStyle(color: Colors.black87),
+                          //       enabledBorder: UnderlineInputBorder(
+                          //           borderSide:
+                          //               BorderSide(color: Colors.transparent)),
+                          //       focusedBorder: UnderlineInputBorder(
+                          //           borderSide:
+                          //               BorderSide(color: Colors.transparent))),
+                          // ),
+                          GestureDetector(
+                              onTap: () {
+                                _selectDate(context);
+                              },
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.date_range,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: () {
+                                        _selectDate(context);
+                                      },
+                                    ),
+                                    Text(
+                                      dateee == null
+                                          ? "Select date"
+                                          : "$dateee",
+                                      style: TextStyle(
+                                          color: Colors.black87,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16),
+                                    )
+                                  ],
                                 ),
-                                labelText: "Occupation",
-                                labelStyle: TextStyle(color: Colors.black87),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent)),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent))),
-                          ),
+                              )),
                           Divider(color: Colors.grey, height: 8),
                           TextFormField(
                             controller: _passwordController,
@@ -340,6 +404,7 @@ class _loginState extends State<login> {
                     child: Center(
                       child: GestureDetector(
                         onTap: () async {
+                          print("yyyyyyyyyyyyyyyyyy");
                           print('you clicked Create Account button');
                           if (formstate.currentState.validate()) {
                             print("hiiiiiiiiiiiiiii" + _name.text);
@@ -365,9 +430,13 @@ class _loginState extends State<login> {
                               'phone': _phonenumber.text,
                               'aboutus':
                                   '\"You Know Yourself better\"...Tell About Yourself',
-                              'occupation': _occupation.text,
+                              'occupation': "Occupation",
                               'Photo':
-                                  'https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png'
+                                  'https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg',
+                              'Date': dateee,
+                              'searchName': _name.text.toLowerCase(),
+                              "caseSearch":
+                                  setSearchParam(_name.text.toLowerCase()),
                             }).then((result) {
                               print("User Added");
                             }).catchError((e) {
@@ -492,5 +561,13 @@ class _loginState extends State<login> {
     );
   }
 
-  CreateUser() {}
+  setSearchParam(String caseNumber) {
+    List<String> caseSearchList = List();
+    String temp = "";
+    for (int i = 0; i < caseNumber.length; i++) {
+      temp = temp + caseNumber[i];
+      caseSearchList.add(temp);
+    }
+    return caseSearchList;
+  }
 }

@@ -19,7 +19,7 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   var _currentindex = 0;
   final tabs = [
-    Center(child: feed()),
+    Center(child: music()),
     Center(
       child: playlist(),
     ),
@@ -33,22 +33,49 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: tabs[_currentindex],
-      bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Colors.grey[50],
-          buttonBackgroundColor: Colors.pink,
-          items: [
-            Icon(Icons.home),
-            Icon(Icons.music_note),
-            Icon(Icons.sports_esports_outlined),
-            Icon(Icons.account_circle_outlined),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentindex = index;
-            });
-          }),
+    onWillPop() {
+      // DialogBox();
+    }
+
+    return WillPopScope(
+        child: Scaffold(
+          body: tabs[_currentindex],
+          bottomNavigationBar: CurvedNavigationBar(
+              backgroundColor: Colors.grey[50],
+              buttonBackgroundColor: Colors.pink,
+              items: [
+                Icon(Icons.home),
+                Icon(Icons.music_note),
+                Icon(Icons.sports_esports_outlined),
+                Icon(Icons.account_circle_outlined),
+              ],
+              onTap: (index) {
+                setState(() {
+                  _currentindex = index;
+                });
+              }),
+        ),
+        onWillPop: onWillPop);
+  }
+
+  void DialogBox() {
+    var baseDialog = AlertDialog(
+      title: new Text("Warning"),
+      content: Container(
+        child: Text('Clicking "CONFIRM" will Make you Go to Login Page Again'),
+      ),
+      actions: <Widget>[
+        FlatButton(
+            color: Colors.blue,
+            child: new Text("Confirm"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            }
+            // Navigator.pop(context);
+            ),
+      ],
     );
+
+    showDialog(context: context, builder: (BuildContext context) => baseDialog);
   }
 }
