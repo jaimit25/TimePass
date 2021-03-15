@@ -12,24 +12,31 @@ class login extends StatefulWidget {
 class _loginState extends State<login> {
   var dateee;
   String date = "22222";
+  var dOB;
   DateTime currentDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime pickedDate = await showDatePicker(
         context: context,
         initialDate: currentDate,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2050));
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2030));
     if (pickedDate != null && pickedDate != currentDate)
       setState(() {
         date = pickedDate.toString()[0] +
             pickedDate.toString()[1] +
             pickedDate.toString()[2] +
             pickedDate.toString()[3];
+        dOB = pickedDate.day.toString() +
+            "-" +
+            pickedDate.month.toString() +
+            "-" +
+            pickedDate.year.toString();
 
         var intdate = int.parse(date);
         assert(intdate is int);
         print(intdate);
+        print(dOB);
 
         setState(() {
           dateee = intdate;
@@ -342,7 +349,7 @@ class _loginState extends State<login> {
                                   children: [
                                     IconButton(
                                       icon: Icon(
-                                        Icons.date_range,
+                                        Icons.cake_rounded,
                                         color: Colors.grey,
                                       ),
                                       onPressed: () {
@@ -350,9 +357,7 @@ class _loginState extends State<login> {
                                       },
                                     ),
                                     Text(
-                                      dateee == null
-                                          ? "Select date"
-                                          : "$dateee",
+                                      dOB == null ? "Select date" : dOB,
                                       style: TextStyle(
                                           color: Colors.black87,
                                           fontWeight: FontWeight.w400,
@@ -425,6 +430,7 @@ class _loginState extends State<login> {
                                 .doc(user.uid)
                                 .set({
                               'uid': user.uid,
+                              'DOB': dOB,
                               'Name': _name.text,
                               'Email': _emailController.text,
                               'phone': _phonenumber.text,

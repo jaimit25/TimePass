@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:TimePass/Screens/editprofile.dart';
 
 import '../Model/userprofile.dart';
 
@@ -82,7 +83,13 @@ class _profileState extends State<profile> {
                 child: Icon(Icons.arrow_back_ios)),
             Container(
                 margin: EdgeInsets.only(right: 20, top: 5),
-                child: Icon(Icons.settings)),
+                child: IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => editprofile()));
+                  },
+                )),
           ],
         ),
       ),

@@ -6,6 +6,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:TimePass/Model/userprofiles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Navigation.dart';
 
 class splash extends StatefulWidget {
   @override
@@ -28,13 +31,19 @@ class _splashState extends State<splash> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getCurrentUser();
+    // getCurrentUser();
     Timer(Duration(seconds: 3), () {
-      // localuser.uid==
       print('this function will work');
       Navigator.of(context).pop();
       Navigator.push(context, MaterialPageRoute(builder: (context) => login()));
     });
+  }
+
+  getStringValuesSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString('useruid');
+    return stringValue;
   }
 
   @override
