@@ -1,16 +1,2 @@
-# TimePass
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Timepass is an app which basically helps people with relieving stress, as we all know that there are so many things on-going with an individual being. So what if we just boost them emotionally and help them interact socially, as because of the Covid scenario, it’s not possible to go outside and sit in a club,enjoy and chit-chat with others. So we come up with this idea and platform wherein they can interact with others, play games, listen to music or listen to Broadcast. And many other things.
